@@ -1,0 +1,297 @@
+/* General page styling */
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #71797E; /* Background color */
+    color: #f8f9fa; /* Light text color for better contrast */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header content is fixed at the top */
+#header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 10vh; /* Set height for the header */
+    width: 100%;
+    background-color: #495057; /* Darker background for header */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100; /* Keep it above other content */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Animation styling for GIF and title */
+#jumping-bowl {
+    position: relative;
+    opacity: 1;
+    animation: slideRight 1.5s ease forwards 2s;
+    margin-top: 0px;
+}
+
+#title-text {
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeIn 2s ease forwards 3s;
+}
+
+/* Form is fixed at the bottom */
+form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #495057; /* Darker background for form */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
+    z-index: 100; /* Keep it above the recipe result section */
+}
+
+/* Large screens (>= 992px): Control widths of input, dropdown, buttons */
+@media (min-width: 992px) {
+    #recipe-input, #recipe-type {
+        width: 42vw; /* 35% width for input and dropdown */
+    }
+
+    .btn-primary { /* "Get Recipe" button */
+        width: 20%;
+    }
+
+    #start-record-btn { /* Microphone button */
+        width: 7%;
+    }
+}
+
+/* Adjust spacing for the form elements */
+form .form-control, form .btn {
+    max-width: none;
+    margin: 0 5px;
+}
+
+form .btn {
+    flex-shrink: 0;
+}
+
+/* Small screens (less than 768px): Stack buttons and input fields differently */
+@media (max-width: 768px) {
+    form {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    #start-record-btn {
+        flex: 0 0 50px; /* Make microphone button smaller */
+        width: 50px;
+    }
+
+    .btn-primary { /* Get Recipe button */
+        width: auto;
+        flex: 0 0 auto;
+    }
+
+    #recipe-input, #recipe-type {
+        flex: 1; /* Full width input and dropdown */
+        margin-right: 10px;
+    }
+
+    #recipe-result {
+        height: calc(100vh - 10vh - 70px); /* Full height minus header and form heights */
+        top: 10vh; /* Keeps it just below the header */
+        overflow-y: auto; /* Enable scrolling if content overflows */
+    }
+}
+
+/* Very small screens (<= 576px): Stack form elements vertically */
+@media (max-width: 576px) {
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #recipe-input, #recipe-type, #start-record-btn, .btn-primary {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #recipe-result {
+        height: calc(100vh - 10vh - 70px); /* Full height minus header and form heights */
+        top: 10vh; /* Keeps it just below the header */
+        overflow-y: auto; /* Enable scrolling if content overflows */
+    }
+}
+
+@media (max-width: 430px) { /* iPhone 15 Pro's width in portrait mode */
+    form {
+        flex-direction: column; /* Stack input and dropdown vertically */
+        align-items: stretch; /* Ensure full width for inputs */
+    }
+
+    #recipe-input, #recipe-type {
+        width: 100%; /* Full width for input and dropdown */
+        margin-bottom: 10px; /* Spacing between elements */
+    }
+
+    /* Change the mic button and get recipe button to be side by side */
+    .button-container {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-between; /* Space them evenly */
+        margin-top: 10px; /* Space above the button container */
+    }
+
+    #start-record-btn, #getRecBtn {
+        flex: 1; /* Allow both buttons to share space equally */
+        margin-right: 10px; /* Right margin for spacing */
+    }
+
+   
+
+    #recipe-result {
+        max-height: calc(78vh - 13vh - 120px); /* Adjust height to fit above the form */
+        top: 13vh; /* Start at the top */
+        padding: 10px; /* Adjust padding as needed */
+        border: 1px solid #2c2c2c; /* Light border color */
+        border-radius: 5px;
+        background-color: #333333; /* Light background color for results */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        font-size: 14px; /* Keep font size readable */
+        overflow-y: auto; /* Enable vertical scrolling if necessary */
+        overflow-x: hidden; /* Disable horizontal scrolling */
+        position: relative; /* Position absolutely within the viewport */
+        z-index: 10; /* Ensure it stays above other elements */
+        margin-top: 10px; /* Optional: give it space below the header */
+    }
+
+    h5 {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff; /* Dark text color for headings */
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff; /* Dark text color for headings */
+    }
+
+    /* Bottom form styles */
+    form {
+        margin-top: 10px; /* Add a top margin for spacing */
+        position: fixed; /* Make the form fixed */
+        bottom: 0; /* Stick to the bottom */
+        left: 0;
+        right: 0;
+        background-color: #495057; /* Darker background for form */
+        padding: 10px; /* Padding around the form */
+        z-index: 100; /* Keep it above other content */
+    }
+
+    body {
+        overflow: hidden; /* Prevent scrolling on the entire page */
+    }
+}
+
+@media (min-width: 768px) {
+    /* Recipe result section: centered in the middle */
+    #recipe-result {
+        opacity: 0;
+        width: 100vw; /* Full width of the viewport */
+        height: calc(97vh - 8vh - 78px); /* Full height minus header and form heights */
+        padding: 20px;
+        border: 1px solid #2c2c2c; /* Dark border for contrast */
+        border-radius: 5px;
+        background-color: #333333; /* Dark background for results */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 8vh; /* Starts just below the header */
+        left: 0;
+        transition: opacity 0.5s ease;
+        overflow-y: auto; /* Enable scrolling if content overflows */
+        z-index: 1; /* Behind the header and form */
+    }
+}
+
+#recipe-result.visible {
+    opacity: 1;
+}
+
+/* Keyframes for animations */
+@keyframes slideRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(230px);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(60px);
+    }
+}
+
+@keyframes fadeInForm {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+    100% {
+        display: flex;
+        opacity: 1;
+    }
+}
+
+/* Default styling for the form-group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for inputs and buttons */
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff; /* Primary button color */
+    color: #f8f9fa; /* Light text color for buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker button color on hover */
+}
+
+.error {
+    color: red; /* Error message color */
+}
+
+h1 {
+    margin: 0;
+    color: #f8f9fa; /* Light color for main heading */
+    margin-top: -50px;
+}
