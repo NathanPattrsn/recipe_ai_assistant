@@ -1,14 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == "__main__":
-    app.run()
-
 
 # Sample recipes database
 recipes = {
@@ -255,38 +247,39 @@ recipes = {
     }
 }
 
+# Route to render the home page (HTML)
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')  # Ensure your index.html is in the 'templates' folder
 
+# API endpoint to return all recipes
 @app.route('/recipes', methods=['GET'])
 def get_recipes():
     return jsonify(recipes)
 
+# API endpoint to return a specific recipe or filtered recipes
 @app.route('/recipe', methods=['GET'])
 def get_recipe():
     recipe_type = request.args.get('type')
     recipe_name = request.args.get('name')
 
-    # Initialize matched_recipes variable
     matched_recipes = {}
 
     # Check if recipe_type is provided
     if recipe_type:
-        if recipe_type.lower() == 'all':  # Check if the type is 'all'
-            matched_recipes = recipes['all']  # Return all recipes
+        if recipe_type.lower() == 'all':
+            matched_recipes = recipes['all']
         else:
-            # Get matched recipes based on the type
             matched_recipes = {k: v for k, v in recipes['all'].items() if v['type'] == recipe_type.lower()}
     else:
-        matched_recipes = recipes['all']  # If no type is provided, return all recipes
+        matched_recipes = recipes['all']
 
-    # If recipe_name is provided, filter by name
+    # Filter by recipe name if provided
     if recipe_name:
         matched_recipes = {k: v for k, v in matched_recipes.items() if k.lower() == recipe_name.lower()}
 
-    return jsonify(matched_recipes)
-
+    return jsonify(matched_recipes), 200
 
 if __name__ == '__main__':
+    # Run the Flask app on a specific port and allow it to be accessible externally
     app.run(host='0.0.0.0', port=3306, debug=True)
