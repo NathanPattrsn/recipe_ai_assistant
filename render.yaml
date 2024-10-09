@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: recipe-ai-assistant
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app  # For production, use gunicorn instead of `python app.py`
+    staticPublishPath: static       # Path to your static files (CSS, JS, images)
+    envVars:
+      FLASK_ENV: production  # or any other environment variable you need
