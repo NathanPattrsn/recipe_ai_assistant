@@ -62,40 +62,51 @@ form.addEventListener('submit', async (e) => {
     const recipeType = typeSelect.value; // Get the selected type
 
     // Prepare the query string based on provided inputs
-    let query = `/recipe?`;
+    let query = `https://recipe-assistant-yj8h.onrender.com/recipe?`; // Full backend URL
+    const params = new URLSearchParams();
+
     if (recipeName) {
-        query += `name=${recipeName.toLowerCase()}`;
+        params.append('name', recipeName.toLowerCase());
     }
     if (recipeType) {
-        query += `&type=${recipeType.toLowerCase()}`;
+        params.append('type', recipeType.toLowerCase());
     }
 
-    const response = await fetch(query); // Make the request to the backend
-    const data = await response.json(); // Parse the JSON response
+    query += params.toString(); // Append parameters to the query
 
-    // Clear previous results
-    resultDiv.innerHTML = '';
-    resultDiv.classList.remove('d-none');
-    resultDiv.classList.add('visible');
+    try {
+        const response = await fetch(query); // Make the request to the backend
 
-    if (response.ok) {
-        if (recipeName && data[recipeName.toLowerCase()]) { // Check if a specific recipe was requested
-            const recipe = data[recipeName.toLowerCase()]; // Single recipe case
-            displayRecipe(recipe, recipeName, 1); // Pass the count as 1
-        } else {
-            // Loop through all matched recipes if no specific name was requested
-            const recipesCount = Object.keys(data).length; // Get the total count of recipes
-            let count = 0; // Initialize counter
+        // Clear previous results
+        resultDiv.innerHTML = '';
+        resultDiv.classList.remove('d-none');
+        resultDiv.classList.add('visible');
 
-            for (const [name, recipe] of Object.entries(data)) {
-                count++; // Increment the counter
-                displayRecipe(recipe, name, recipesCount); // Pass the count to displayRecipe
+        if (response.ok) {
+            const data = await response.json(); // Parse the JSON response
+            if (recipeName && data[recipeName.toLowerCase()]) { // Check if a specific recipe was requested
+                const recipe = data[recipeName.toLowerCase()]; // Single recipe case
+                displayRecipe(recipe, recipeName, 1); // Pass the count as 1
+            } else {
+                // Loop through all matched recipes if no specific name was requested
+                const recipesCount = Object.keys(data).length; // Get the total count of recipes
+                let count = 0; // Initialize counter
+
+                for (const [name, recipe] of Object.entries(data)) {
+                    count++; // Increment the counter
+                    displayRecipe(recipe, name, recipesCount); // Pass the count to displayRecipe
+                }
             }
+        } else {
+            const errorData = await response.json();
+            resultDiv.innerHTML = `<p class="error">${errorData.error}</p>`;
         }
-    } else {
-        resultDiv.innerHTML = `<p class="error">${data.error}</p>`;
+    } catch (error) {
+        console.error('Failed to fetch:', error);
+        resultDiv.innerHTML = `<p class="error">Failed to fetch recipes. Please check your connection or try again later.</p>`;
     }
 });
+
 
 // Function to display a single recipe
 function displayRecipe(recipe, name, totalCount) {
