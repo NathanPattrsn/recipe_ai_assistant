@@ -1,6 +1,9 @@
+import logging
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG)  # Set level to DEBUG for detailed logs
+
 
 # Sample recipes database
 recipes = {
