@@ -1,48 +1,9 @@
-// app.js
-import { createClient } from '@supabase/supabase-js'
-// Initialize Supabase client
-const { createClient } = supabase;
-const supabaseUrl = 'https://alkeobrltwcjdvptiddy.supabase.co'; // Replace with your Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsa2VvYnJsdHdjamR2cHRpZGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1ODQwOTMsImV4cCI6MjA0NDE2MDA5M30.DwXHOVJ3pGL5AW7jrnyCtgL3lznBoux2oBJXas9fIx4'; // Replace with your public API key
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Check if user exists in the database
-async function checkUser() {
-    const user = supabase.auth.user(); // Get the currently logged-in user
-
-    if (!user) {
-        // If no user is logged in, check the database for the user by email or any identifier
-        const { data, error } = await supabase
-            .from('users') // Replace with your users table name
-            .select('id') // Select the user id or any other identifier
-            .eq('email', 'user-email@example.com'); // Replace with the method of checking user (e.g., email)
-
-        if (error) {
-            console.error('Error checking user:', error);
-        } else if (data.length === 0) {
-            // User does not exist, redirect to registration page
-            window.location.href = 'registration.html'; // Redirect to the registration page
-        } else {
-            // User exists, proceed with normal application flow
-            console.log('User exists, continue to the app.');
-        }
-    } else {
-        console.log('User is logged in:', user);
-    }
-}
-
-// Call checkUser function on page load
-document.addEventListener('DOMContentLoaded', () => {
-    checkUser(); // Check if user exists when the page loads
-});
-
 // Get references to the elements
 const form = document.getElementById('recipe-form');
 const resultDiv = document.getElementById('recipe-result');
 const recipeInput = document.getElementById('recipe-input');
 const typeSelect = document.querySelector('select[name="type"]');
 const startRecordBtn = document.getElementById('start-record-btn');
-const registrationForm = document.getElementById('registration-form'); // New registration form reference
 
 let recognition;
 let isRecording = false; // Track the recording state
@@ -146,6 +107,7 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
+
 // Function to display a single recipe
 function displayRecipe(recipe, name, totalCount) {
     resultDiv.innerHTML += `
@@ -167,35 +129,6 @@ function displayRecipe(recipe, name, totalCount) {
     `;
 }
 
-// New registration functionality
-registrationForm.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent form submission
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    // Call function to insert data
-    await registerUser(username, email, password);
-});
-
-// Insert data into Supabase
-async function registerUser(username, password, email) {
-    const { data, error } = await supabase
-        .from('accounts') // Replace with your table name
-        .insert([
-            { username: username, password: password, email: email }
-        ]);
-
-        if (error) {
-            console.error('Error:', error);
-            alert('Registration failed. Please try again.');
-        } else {
-            alert('Registration successful!');
-            window.location.href = 'index.html'; // Redirect to the main app page after successful registration
-        }
-}
-
 function setSelectWidth() {
     const input = document.getElementById('recipe-input');
     const select = document.getElementById('recipe-type');
@@ -215,3 +148,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#recipe-form').style.display = 'flex';
     }, 3000); // Show form after 5 seconds (same as fadeInForm timing)
 });
+
+
