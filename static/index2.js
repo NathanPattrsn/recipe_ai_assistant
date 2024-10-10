@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
 const supabaseUrl = 'https://alkeobrltwcjdvptiddy.supabase.co';
-const supabaseKey = 'your-supabase-key'; // Ensure this key is not exposed publicly
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsa2VvYnJsdHdjamR2cHRpZGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1ODQwOTMsImV4cCI6MjA0NDE2MDA5M30.DwXHOVJ3pGL5AW7jrnyCtgL3lznBoux2oBJXas9fIx4'; // Ensure this key is not exposed publicly
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to register a new user
@@ -16,11 +16,9 @@ async function registerUser(username, password, email) {
     if (error) {
         console.error('Error registering user:', error.message);
         alert(`Error registering user: ${error.message}`);
-        window.location.href = 'recipe_assistant.html';
     } else {
         console.log('User registered successfully:', data); // Check if data contains the new user info
         alert('Registration successful!');
-        window.location.href = 'recipe_assistant.html';
         // Optional login logic
         const { user, error: loginError } = await supabase.auth.signIn({ email, password });
         if (loginError) {
