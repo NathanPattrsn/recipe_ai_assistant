@@ -56,7 +56,7 @@ async function registerUser(username, password, email) {
     } else {
         console.log('User registered successfully:', data); // Check if data contains the new user info
         alert('Registration successful!');
-        window.location.href = 'recipe_assistant.html';
+        // window.location.href = 'recipe_assistant.html';
 
         // Optional login logic
         const { user, error: loginError } = await supabase.auth.signIn({ email, password });
@@ -65,7 +65,7 @@ async function registerUser(username, password, email) {
             alert(`Login failed: ${loginError.message}`);
         } else {
             console.log('User logged in:', user);
-            window.location.href = 'recipe_assistant.html';
+            // window.location.href = 'recipe_assistant.html';
         }
     }
 }
