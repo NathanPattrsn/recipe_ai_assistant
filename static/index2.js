@@ -30,7 +30,7 @@ async function registerUser(username, password, email) {
         } else {
             console.log('User logged in:', user); // Log logged in user
             // Redirect to the main application or home page after successful login
-            window.location.href = 'index.html'; // Change this to your main application page
+            window.location.href = 'recipe_assistant.html'; // Change this to your main application page
         }
     }
 }
