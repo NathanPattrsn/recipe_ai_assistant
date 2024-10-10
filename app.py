@@ -262,7 +262,7 @@ def home():
     #     return f"User {username} registered with email {email}."
     return render_template('index.html')  # Ensure your index.html is in the 'templates' folder
 
-@app.route('/recipe_assistant', methods=['GET', 'POST'])
+@app.route('/recipe_assistant', methods=['GET'])
 def recipe_assistant():
     return render_template('recipe_assistant.html')
 
