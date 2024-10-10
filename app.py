@@ -251,14 +251,15 @@ recipes = {
 }
 
 # Route to render the home page (HTML)
-@app.route('/')
+@app.route('/register', methods=['GET', 'POST'])
 def home():
-    # if request.method == 'POST':
-    #     # Handle the form submission
-    #     username = request.form['username']
-    #     email = request.form['email']
-    #     password = request.form['password']
-    #     return f"User {username} registered with email {email}."
+    app.logger.debug(f"Request method: {request.method}")  # Log the request method
+    if request.method == 'POST':
+        # Handle the form submission
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        return f"User {username} registered with email {email}."
     return render_template('index.html')  # Ensure your index.html is in the 'templates' folder
 
 # API endpoint to return all recipes
