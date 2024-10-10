@@ -5,6 +5,11 @@ const recipeInput = document.getElementById('recipe-input');
 const typeSelect = document.querySelector('select[name="type"]');
 const startRecordBtn = document.getElementById('start-record-btn');
 
+// Check if the user is on the root page and redirect to registration
+if (window.location.pathname === '/') {
+    window.location.href = '../templates/registration.html'; // Redirect to the registration page
+}
+
 let recognition;
 let isRecording = false; // Track the recording state
 
@@ -107,7 +112,6 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
-
 // Function to display a single recipe
 function displayRecipe(recipe, name, totalCount) {
     resultDiv.innerHTML += `
@@ -146,7 +150,5 @@ window.onresize = setSelectWidth;
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         document.querySelector('#recipe-form').style.display = 'flex';
-    }, 3000); // Show form after 5 seconds (same as fadeInForm timing)
+    }, 3000); // Show form after 3 seconds (same as fadeInForm timing)
 });
-
-
