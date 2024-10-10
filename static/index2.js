@@ -36,18 +36,18 @@ async function registerUser(username, password, email) {
 }
 
 // Event listener for the registration form submission
-document.addEventListener('DOMContentLoaded', () => {
-    const registrationForm = document.getElementById('registration-form');
+// document.addEventListener('DOMContentLoaded', () => {
+//     const registrationForm = document.getElementById('registration-form');
     
-    registrationForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent default form submission
+//     registrationForm.addEventListener('submit', async (event) => {
+//         event.preventDefault(); // Prevent default form submission
 
-        // Get user inputs
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+//         // Get user inputs
+//         const username = document.getElementById('username').value;
+//         const email = document.getElementById('email').value;
+//         const password = document.getElementById('password').value;
 
-        // Call registerUser to save the new user
-        await registerUser(username, password, email);
-    });
-});
+//         // Call registerUser to save the new user
+//         await registerUser(username, password, email);
+//     });
+// });
