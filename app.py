@@ -260,7 +260,7 @@ def home():
     #     email = request.form['email']
     #     password = request.form['password']
     #     return f"User {username} registered with email {email}."
-    return render_template('recipe_assistant.html')  # Ensure your index.html is in the 'templates' folder
+    return render_template('index.html')  # Ensure your index.html is in the 'templates' folder
 
 @app.route('/recipe_assistant')
 def recipe_assistant():
