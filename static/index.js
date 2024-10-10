@@ -182,7 +182,7 @@ registrationForm.addEventListener('submit', async (event) => {
 // Insert data into Supabase
 async function registerUser(username, password, email) {
     const { data, error } = await supabase
-        .from('users') // Replace with your table name
+        .from('accounts') // Replace with your table name
         .insert([
             { username: username, password: password, email: email }
         ]);
@@ -192,7 +192,7 @@ async function registerUser(username, password, email) {
             alert('Registration failed. Please try again.');
         } else {
             alert('Registration successful!');
-            window.location.href = '../templates/index.html'; // Redirect to the main app page after successful registration
+            window.location.href = 'index.html'; // Redirect to the main app page after successful registration
         }
 }
 
