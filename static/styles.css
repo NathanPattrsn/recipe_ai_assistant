@@ -43,7 +43,7 @@ body {
 }
 
 /* Form is fixed at the bottom */
-form {
+#recipe-form {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -74,18 +74,18 @@ form {
 }
 
 /* Adjust spacing for the form elements */
-form .form-control, form .btn {
+#recipe-form .form-control, #recipe-form .btn {
     max-width: none;
     margin: 0 5px;
 }
 
-form .btn {
+#recipe-form .btn {
     flex-shrink: 0;
 }
 
 /* Small screens (less than 768px): Stack buttons and input fields differently */
 @media (max-width: 768px) {
-    form {
+    #recipe-form {
         flex-direction: row;
         justify-content: space-between;
         padding: 10px;
@@ -115,7 +115,7 @@ form .btn {
 
 /* Very small screens (<= 576px): Stack form elements vertically */
 @media (max-width: 576px) {
-    form {
+    #recipe-form {
         flex-direction: column;
         align-items: stretch;
     }
@@ -133,7 +133,7 @@ form .btn {
 }
 
 @media (max-width: 430px) { /* iPhone 15 Pro's width in portrait mode */
-    form {
+    #recipe-form {
         flex-direction: column; /* Stack input and dropdown vertically */
         align-items: stretch; /* Ensure full width for inputs */
     }
@@ -186,7 +186,7 @@ form .btn {
     }
 
     /* Bottom form styles */
-    form {
+    #recipe-form {
         margin-top: 10px; /* Add a top margin for spacing */
         position: fixed; /* Make the form fixed */
         bottom: 0; /* Stick to the bottom */

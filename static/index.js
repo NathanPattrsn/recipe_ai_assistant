@@ -7,7 +7,33 @@ const startRecordBtn = document.getElementById('start-record-btn');
 
 // Check if the user is on the root page and redirect to registration
 if (window.location.pathname === '/') {
-    window.location.href = '/registration.html'; // Redirect to the registration page
+    loadRegistrationPage(); // Call the function to load the registration page content
+}
+
+async function loadRegistrationPage() {
+    try {
+        const response = await fetch('/registration.html'); // Fetch the HTML file
+        if (!response.ok) {
+            throw new Error('Failed to load the registration page');
+        }
+
+        const html = await response.text(); // Get the HTML content as text
+
+        // Insert the content into a specific element (e.g., a div)
+        document.body.innerHTML = html;
+
+        // Optionally, run any scripts you need from the fetched page
+        loadExternalScripts();
+    } catch (error) {
+        console.error('Error loading registration page:', error);
+    }
+}
+
+function loadExternalScripts() {
+    // If you need to load any external JS files, do it here
+    const script = document.createElement('script');
+    script.src = '../static/index2.js';
+    document.body.appendChild(script);
 }
 
 let recognition;
