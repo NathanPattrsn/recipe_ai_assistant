@@ -7,7 +7,7 @@ const startRecordBtn = document.getElementById('start-record-btn');
 
 // Check if the user is on the root page and redirect to registration
 if (window.location.pathname === '/') {
-    window.location.href = '../templates/registration.html'; // Redirect to the registration page
+    window.location.href = '/registration.html'; // Redirect to the registration page
 }
 
 let recognition;
