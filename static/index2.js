@@ -16,10 +16,11 @@ async function registerUser(username, password, email) {
     if (error) {
         console.error('Error registering user:', error.message);
         alert(`Error registering user: ${error.message}`);
+        window.location.href = 'recipe_assistant.html';
     } else {
         console.log('User registered successfully:', data); // Check if data contains the new user info
         alert('Registration successful!');
-
+        window.location.href = 'recipe_assistant.html';
         // Optional login logic
         const { user, error: loginError } = await supabase.auth.signIn({ email, password });
         if (loginError) {
