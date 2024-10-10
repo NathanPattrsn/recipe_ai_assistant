@@ -28,7 +28,7 @@ async function registerUser(username, password, email) {
         } else {
             console.log('User logged in:', user);
             // Uncomment if you want to redirect after login
-            // window.location.href = 'recipe_assistant.html';
+            window.location.href = 'recipe_assistant.html';
         }
     }
 }
@@ -47,5 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Call registerUser to save the new user
         await registerUser(username, password, email);
+        window.location.href = 'recipe_assistant.html';
     });
 });
