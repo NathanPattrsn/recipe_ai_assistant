@@ -251,7 +251,7 @@ recipes = {
 }
 
 # Route to render the home page (HTML)
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
     app.logger.debug(f"Request method: {request.method}")  # Log the request method
     if request.method == 'POST':
