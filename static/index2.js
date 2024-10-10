@@ -1,15 +1,17 @@
+// Import Supabase client if using ES modules
+import { createClient } from '@supabase/supabase-js';
+
 // Initialize Supabase client
 const supabaseUrl = 'https://alkeobrltwcjdvptiddy.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsa2VvYnJsdHdjamR2cHRpZGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1ODQwOTMsImV4cCI6MjA0NDE2MDA5M30.DwXHOVJ3pGL5AW7jrnyCtgL3lznBoux2oBJXas9fIx4'; // Replace with your actual Supabase key
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
+const supabaseKey = 'your-supabase-key'; // Ensure this key is not exposed publicly
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to register a new user
 async function registerUser(username, password, email) {
     console.log('Attempting to register user:', { username, email }); // Debugging statement
     const { data, error } = await supabase
         .from('accounts') // Ensure 'accounts' is the correct table name
-        .insert([{ username: username, password: password, email: email }]);
+        .insert([{ username, password, email }]);
 
     if (error) {
         console.error('Error registering user:', error.message);
@@ -17,7 +19,6 @@ async function registerUser(username, password, email) {
     } else {
         console.log('User registered successfully:', data); // Check if data contains the new user info
         alert('Registration successful!');
-        window.location.href = 'recipe_assistant.html';
 
         // Optional login logic
         const { user, error: loginError } = await supabase.auth.signIn({ email, password });
@@ -26,11 +27,11 @@ async function registerUser(username, password, email) {
             alert(`Login failed: ${loginError.message}`);
         } else {
             console.log('User logged in:', user);
-            window.location.href = 'recipe_assistant.html';
+            // Uncomment if you want to redirect after login
+            // window.location.href = 'recipe_assistant.html';
         }
     }
 }
-
 
 // Event listener for the registration form submission
 document.addEventListener('DOMContentLoaded', () => {
