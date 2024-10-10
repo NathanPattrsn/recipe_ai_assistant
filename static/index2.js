@@ -1,34 +1,28 @@
-// index.js
-
 // Initialize Supabase client
-// import { createClient } from '@supabase/supabase-js';
-
 const supabaseUrl = 'https://alkeobrltwcjdvptiddy.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsa2VvYnJsdHdjamR2cHRpZGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1ODQwOTMsImV4cCI6MjA0NDE2MDA5M30.DwXHOVJ3pGL5AW7jrnyCtgL3lznBoux2oBJXas9fIx4';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsa2VvYnJsdHdjamR2cHRpZGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg1ODQwOTMsImV4cCI6MjA0NDE2MDA5M30.DwXHOVJ3pGL5AW7jrnyCtgL3lznBoux2oBJXas9fIx4'; // Replace with your actual Supabase key
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Function to register a new user
 async function registerUser(username, password, email) {
     const { data, error } = await supabase
         .from('accounts') // Replace with your users table name
-        .insert([
-            { username: username, password: password, email: email } // Save the username, email, and password
-        ]);
+        .insert([{ username: username, password: password, email: email }]);
 
     if (error) {
-        console.error('Error registering user:', error.message); // Log error
-        alert(`Error registering user: ${error.message}`); // Display error message to user
+        console.error('Error registering user:', error.message);
+        alert(`Error registering user: ${error.message}`);
     } else {
-        console.log('User registered successfully:', data); // Log success message
-        alert('Registration successful!'); // Notify user of successful registration
+        console.log('User registered successfully:', data);
+        alert('Registration successful!');
 
         // Optionally, you can log in the user after registration
         const { user, error: loginError } = await supabase.auth.signIn({ email, password });
         if (loginError) {
-            console.error('Login failed:', loginError.message); // Log login error
-            alert(`Login failed: ${loginError.message}`); // Display login error to user
+            console.error('Login failed:', loginError.message);
+            alert(`Login failed: ${loginError.message}`);
         } else {
-            console.log('User logged in:', user); // Log logged in user
+            console.log('User logged in:', user);
             // Redirect to the main application or home page after successful login
             window.location.href = 'recipe_assistant.html'; // Change this to your main application page
         }
