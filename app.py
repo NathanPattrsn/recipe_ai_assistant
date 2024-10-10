@@ -250,7 +250,7 @@ recipes = {
 # Route to render the home page (HTML)
 @app.route('/')
 def home():
-    return render_template('index.html')  # Ensure your index.html is in the 'templates' folder
+    return render_template('landing_page.html')  # Ensure your index.html is in the 'templates' folder
 
 # API endpoint to return all recipes
 @app.route('/recipes', methods=['GET'])
