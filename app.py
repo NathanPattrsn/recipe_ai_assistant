@@ -254,13 +254,17 @@ recipes = {
 @app.route('/', methods=['GET', 'POST'])
 def home():
     app.logger.debug(f"Request method: {request.method}")  # Log the request method
-    if request.method == 'POST':
-        # Handle the form submission
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        return f"User {username} registered with email {email}."
+    # if request.method == 'POST':
+    #     # Handle the form submission
+    #     username = request.form['username']
+    #     email = request.form['email']
+    #     password = request.form['password']
+    #     return f"User {username} registered with email {email}."
     return render_template('index.html')  # Ensure your index.html is in the 'templates' folder
+
+@app.route('/recipe_assistant')
+def recipe_assistant():
+    return render_template('recipe_assistant.html')
 
 # API endpoint to return all recipes
 @app.route('/recipes', methods=['GET'])
